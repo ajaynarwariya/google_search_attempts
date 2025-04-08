@@ -3,12 +3,14 @@ const puppeteer = require("puppeteer");
 (async () => {
   const keyword = "Rec2Tech Scuba";
   const targetwebsite = "rec2techscuba.com";
-  const browser = await puppeteer.launch({ 
+  const browser = await puppeteer.launch({
+    defaultViewport: false,
     headless: false });
   const page = await browser.newPage();
 
   await page.goto("https://www.google.com");
   try { await page.click('[aria-label="Accept all"]'); } catch {}
+  try { await page.click('[aria-label="Stay signed out"]'); } catch {}
 
   await page.waitForSelector("input[name='q']");
   await page.type("input[name='q']", keyword);
